@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyện Con Mèo Dạy Hải Âu Bay - Luis Sepúlveda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+
+            --sky-blue-top: #65b8f7;   
+            --sky-blue-bottom: #e8f4fd; 
+            --deep-blue-text: #054988;  
+            --nav-bg: rgba(255, 255, 255, 0.95); 
+            --dark-text: #333;         
+            --quote-bg: #e1f5fe;       
+            --accent-color: #f7b445;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            background: linear-gradient(to bottom, var(--sky-blue-top), var(--sky-blue-bottom) 60%, #fff);
+            min-height: 200vh;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--deep-blue-text);
+        }
+        
+        body, a, button, .nav-item, .nav-item a, .book-cover-img:hover, 
+        p, section, h1, h2, h3, div, 
+        footer, header, main {
+            cursor: none !important;
+        }
+
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 15px;
+            height: 15px;
+            background-color: var(--deep-blue-text);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out, background-color 0.2s, opacity 0.3s; /* Cập nhật transition */
+            z-index: 9999;
+            opacity: 1;
+        }
+        
+        #custom-cursor.hover-mode {
+            transform: scale(1.5) translate(-33%, -33%);
+            background-color: var(--accent-color);
+        }
+
+        #custom-cursor.radar-mode {
+            transform: scale(10) translate(-5%, -5%);
+            background-color: rgba(5, 73, 136, 0.15);
+            opacity: 1;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), background-color 0.4s; 
+        }
+        
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: var(--nav-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px 0;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .navbar-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-item a {
+            text-decoration: none;
+            color: var(--deep-blue-text);
+            padding: 8px 15px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .nav-item a:hover {
+            background-color: var(--deep-blue-text);
+            color: white;
+        }
+
+        header.main-header {
+            text-align: center;
+            padding: 4rem 1rem 2rem;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+        }
+
+        main.container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            backdrop-filter: blur(8px);
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-top: 0;
+            border-bottom: 4px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .hidden-element {
+            opacity: 0;
+            transform: translateY(60px); 
+            transition: opacity 1.0s ease-out, transform 1.0s ease-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0); 
+        }
+        
+        .intro-flex {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .book-cover-container {
+            flex: 1;
+            text-align: center;
+        }
+        .book-cover-img {
+            max-width: 100%;
+            width: 350px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 8px 8px 25px rgba(0,0,0,0.3);
+            transform: rotate(-3deg);
+            transition: transform 0.4s;
+        }
+        .book-cover-img:hover {
+            transform: rotate(0) scale(1.05);
+        }
+        .book-info {
+            flex: 1.5;
+        }
+        .author-name {
+            font-size: 1.6rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        blockquote.aesthetic-quote {
+            background-color: var(--quote-bg);
+            border-left: 10px solid var(--deep-blue-text);
+            padding: 3rem;
+            margin: 2.5rem 0;
+            font-size: 1.4rem;
+            font-style: italic;
+            position: relative;
+            border-radius: 0 20px 20px 0;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+        }
+
+        blockquote.aesthetic-quote::before {
+            content: "“";
+            font-family: serif;
+            font-size: 10rem;
+            color: var(--deep-blue-text);
+            opacity: 0.1;
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            line-height: 1;
+        }
+        blockquote footer {
+            text-align: right;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            color: var(--deep-blue-text);
+            font-weight: 600;
+            border-top: 1px dashed var(--accent-color);
+            padding-top: 10px;
+        }
+
+        .fun-facts-list {
+            list-style: none;
+            padding-left: 0;
+            line-height: 2;
+        }
+        .fun-facts-list li {
+            margin-bottom: 10px;
+            padding-left: 35px;
+            position: relative;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+            border-radius: 5px;
+        }
+
+        .fun-facts-list li::before {
+            font-family: 'Font Awesome 5 Free';
+            content: "\f1b0";
+            font-weight: 900;
+            color: var(--deep-blue-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .fun-facts-list li:nth-child(2)::before { content: "\f5b8"; }
+        .fun-facts-list li:nth-child(3)::before { content: "\f008"; }
+
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--deep-blue-text);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .intro-flex {
+                flex-direction: column;
+                align-items: center;
+            }
+            header h1 { font-size: 3rem; }
+            section { padding: 2rem; }
+            section h2 { font-size: 2rem; }
+            blockquote.aesthetic-quote { 
+                padding: 2rem;
+                font-size: 1.1rem;
+            }
+            .navbar-list { 
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="custom-cursor"></div> 
+
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <li class="nav-item"><a href="#intro">Tác Phẩm & Tác Giả</a></li>
+            <li class="nav-item"><a href="#summary">Tóm Tắt</a></li>
+            <li class="nav-item"><a href="#quote">Trích Dẫn</a></li>
+            <li class="nav-item"><a href="#fun-facts">Fun Facts</a></li>
+        </ul>
+    </nav>
+
+    <header class="main-header hidden-element">
+        <h1>Chuyện Con Mèo Dạy Hải Âu Bay</h1>
+        <p style="font-style: italic;">Một câu chuyện cổ tích về lòng dũng cảm và lời hứa</p>
+    </header>
+
+    <main class="container">
+        <section id="intro" class="hidden-element">
+            <article class="intro-flex">
+                <figure class="book-cover-container">
+                    <img src="conmeo1.jpg" alt="Bìa sách Chuyện con mèo dạy hải âu bay" class="book-cover-img">
+                </figure>
+                <div class="book-info">
+                    <h2>Giới Thiệu Tác Phẩm</h2>
+                    <p>Tác giả: <span class="author-name">Luis Sepúlveda</span></p>
+                    <p>Cuốn sách là một tác phẩm văn học thiếu nhi kinh điển của nhà văn người Chile. Đây không chỉ là câu chuyện cảm động mà còn là lời tuyên ngôn về tình bạn, lòng dũng cảm và việc giữ trọn lời hứa vượt qua mọi rào cản về giống loài. Tác phẩm đã làm rung động trái tim hàng triệu độc giả trên toàn thế giới.</p>
+                </div>
+            </article>
+        </section>
+
+        <section id="summary" class="hidden-element">
+            <h2>Tóm Tắt Nội Dung</h2>
+            <p>Câu chuyện lấy bối cảnh tại thành phố cảng Hamburg. Mở đầu là bi kịch của cô hải âu Kengah bị dính dầu loang và rơi xuống ban công của chú mèo mun to béo, tốt bụng tên là Zorba.</p>
+            <p>Trước khi chết, Kengah buộc Zorba phải hứa ba lời thề: không ăn quả trứng sắp sinh ra, chăm sóc cho tới khi nó nở, và quan trọng nhất: dạy cho hải âu con biết bay.</p>
+            <p>Zorba, với sự giúp đỡ của những người bạn mèo thông thái khác như Đại Tá, Secretario, và Einstein, đã dấn thân vào sứ mệnh làm "mẹ" bất đắc dĩ. Chúng đã vượt qua vô số thử thách, từ việc bảo vệ quả trứng khỏi những con mèo xấu xa cho đến việc nuôi nấng và cuối cùng là giúp chú hải âu con Lucky nhận ra bản năng của mình.</p>
+            <p>Cuối cùng, để thực hiện lời hứa khó khăn nhất, Zorba đã phải phá vỡ nguyên tắc quan trọng nhất của loài mèo: cầu cứu sự giúp đỡ của con người. Nhờ vào sự đồng cảm của một nhà thơ, Lucky đã cất cánh, sải cánh bay lượn trên bầu trời đêm Hamburg, chứng minh rằng tình yêu thương có thể xóa nhòa mọi khác biệt.</p>
+        </section>
+
+        <section id="quote" class="hidden-element">
+            <h2>Trích Dẫn Hay Nhất</h2>
+            <blockquote class="aesthetic-quote">
+                "Thật dễ dàng để chấp nhận và yêu thương một kẻ nào đó giống mình, nhưng để yêu thương ai đó khác mình thực sự rất khó khăn, và con đã giúp chúng ta làm được điều đó. Con là chim hải âu, và con phải sống cuộc đời của một con hải âu. Con phải bay."
+                <footer>— Lời của mèo Zorba nói với hải âu Lucky</footer>
+            </blockquote>
+        </section>
+
+        <section id="opinion" class="hidden-element">
+            <h2>Cảm Nhận Cá Nhân</h2>
+            <p>Đây không chỉ là một cuốn sách thiếu nhi mà là một bài học sâu sắc về lòng nhân ái và trách nhiệm. Điều tôi yêu thích nhất là cách Zorba cùng những người bạn giữ trọn lời hứa, bất chấp sự khác biệt về bản năng. Tác phẩm còn khéo léo lồng ghép thông điệp về bảo vệ môi trường, khiến chúng ta phải suy ngẫm về hành động của mình. Đọc xong, bạn sẽ tin rằng: "Chỉ những kẻ thực sự dám thì mới có thể bay."</p>
+        </section>
+
+        <section id="fun-facts" class="hidden-element">
+            <h2>Góc Thông Tin Thú Vị</h2>
+            <ul class="fun-facts-list">
+                <li>Đây là cuốn truyện đầu tiên Luis Sepúlveda viết cho thiếu nhi và đã trở thành một tác phẩm kinh điển, được dịch ra hơn 40 thứ tiếng.</li>
+                <li>Tác giả đã lồng ghép thông điệp mạnh mẽ về bảo vệ môi trường biển thông qua bi kịch của mẹ hải âu Kengah, nhấn mạnh hậu quả của sự vô trách nhiệm của con người.</li>
+                <li>Tác phẩm đã được chuyển thể thành phim hoạt hình rất thành công tại Ý vào năm 1998 với tựa đề "Lucky and Zorba" (La gabbianella e il gatto), và nhận được nhiều giải thưởng.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© Trang giới thiệu sách Luis Sepúlveda. Thiết kế lấy cảm hứng từ Bầu trời Hamburg.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const hiddenElements = document.querySelectorAll('.hidden-element');
+
+            const observerOptions = {
+                root: null, 
+                threshold: 0.10
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                    
+                });
+            }, observerOptions);
+
+            hiddenElements.forEach(el => observer.observe(el));
+
+
+            const customCursor = document.getElementById('custom-cursor');
+            const interactiveElements = document.querySelectorAll('a, button, .book-cover-img'); 
+            const navLinks = document.querySelectorAll('.nav-item a');
+
+            document.addEventListener('mousemove', (e) => {
+                customCursor.style.left = e.clientX + 'px';
+                customCursor.style.top = e.clientY + 'px';
+            });
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    customCursor.classList.add('hover-mode');
+                });
+                el.addEventListener('mouseleave', () => {
+                    if (!customCursor.classList.contains('radar-mode')) {
+                        customCursor.classList.remove('hover-mode');
+                    }
+                });
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    customCursor.classList.add('radar-mode');
+                    customCursor.classList.remove('hover-mode');
+                    
+                    setTimeout(() => {
+                        customCursor.classList.remove('radar-mode');
+                    }, 500);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
