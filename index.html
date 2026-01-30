@@ -259,6 +259,50 @@
             .navbar-list { 
                 justify-content: space-around;
             }
+        
+        }
+        .multimedia-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+        }
+
+        .audio-player {
+            width: 100%;
+            background: var(--quote-bg);
+            padding: 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        audio {
+            width: 90%;
+            height: 40px;
+        }
+
+        .media-label {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--deep-blue-text);
+            margin-bottom: 10px;
+            display: block;
+            text-align: center;
         }
     </style>
 </head>
@@ -283,7 +327,7 @@
         <section id="intro" class="hidden-element">
             <article class="intro-flex">
                 <figure class="book-cover-container">
-                    <img src="conmeo1.jpg" alt="Bìa sách Chuyện con mèo dạy hải âu bay" class="book-cover-img">
+                    <img src="https://raw.githubusercontent.com/ngocbao052208-create/gioithieusach/main/conmeo1.jpg" alt="Bìa sách Chuyện con mèo dạy hải âu bay" class="book-cover-img">
                 </figure>
                 <div class="book-info">
                     <h2>Giới Thiệu Tác Phẩm</h2>
@@ -321,6 +365,30 @@
                 <li>Tác giả đã lồng ghép thông điệp mạnh mẽ về bảo vệ môi trường biển thông qua bi kịch của mẹ hải âu Kengah, nhấn mạnh hậu quả của sự vô trách nhiệm của con người.</li>
                 <li>Tác phẩm đã được chuyển thể thành phim hoạt hình rất thành công tại Ý vào năm 1998 với tựa đề "Lucky and Zorba" (La gabbianella e il gatto), và nhận được nhiều giải thưởng.</li>
             </ul>
+        </section>
+        <section id="multimedia" class="hidden-element">
+            <h2>Góc Đa Phương Tiện</h2>
+            <div class="multimedia-section">
+                
+                <div class="video-container" style="width: 100%;">
+                    <span class="media-label"> Video minh họa </span>
+                    <div class="video-wrapper">
+                        <video controls>
+                            <source src="meo mun.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="audio-container" style="width: 100%; margin-top: 20px;">
+                    <span class="media-label"> Audio giới thiệu sách </span>
+                    <div class="audio-player">
+                        <audio controls>
+                            <source src="hai au.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
     </main>
